@@ -23,8 +23,7 @@
 #                          installed the spring binstubs per the docs)
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
-
-guard :rspec, cmd: "bundle exec rspec" do
+ guard :rspec, cmd: "bin/rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -35,6 +34,8 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
+  
+  
 
   # Ruby files
   ruby = dsl.ruby
@@ -53,11 +54,13 @@ guard :rspec, cmd: "bundle exec rspec" do
     ]
   end
   
- guard :rspec, cmd: "bin/rspec" do
+
   
   watch(%r{^app/models/(.+)\.rb$}) { |m| "spec/features/#{m[1]}s" }
   watch(%r{^app/controllers/(.+)_(controller)\.rb$}) { |m| "spec/features/#{m[1]}" }
   watch(rails.routes)          { "#{rspec.spec_dir}" }
+  
+  watch(rails.view_dirs) { |m| "spec/features/#{m[1]}" }
   
   
 
@@ -76,4 +79,4 @@ guard :rspec, cmd: "bundle exec rspec" do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end
-end
+
