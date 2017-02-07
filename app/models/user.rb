@@ -33,6 +33,12 @@
   end
   
   def follows_or_same?(new_friend)
-    friendships.map(&:friend).include?(new_friend) || self == new.friend
+    friendships.map(&:friend).include?(new_friend) || self == new_friend
   end
+  
+  def current_friendship(friend)
+    friendships.where(friend: friend).first
+  end
+  
+  
  end
