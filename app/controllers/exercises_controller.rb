@@ -1,5 +1,6 @@
 class ExercisesController < ApplicationController
  def index
+   @exercises = current_user.exercises
  end
  
  def show
@@ -11,7 +12,8 @@ class ExercisesController < ApplicationController
  end
  
  def create
-  @exercise = current_user.exercises.new(exercise_params)
+   @exercise = current_user.exercises.new(exercise_params)
+    
   
   if @exercise.save
    flash[:notice] = "Exercise has been created"
