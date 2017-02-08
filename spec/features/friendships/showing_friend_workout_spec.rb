@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.feature "Searching for User" do
   before do
-    @john = User.create!(first_name: "John",
+    @john = User.create(first_name: "John",
                         last_name: "Doe",
                         email: "john@example.com",
                         password: "password")
                         
-    @sarah = User.create!(first_name: "Sarah", 
+    @sarah = User.create(first_name: "Sarah", 
                           last_name: "Doe",
                           email: "sarah@example.com",
                           password: "password")

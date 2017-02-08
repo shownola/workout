@@ -1,24 +1,24 @@
 require "rails_helper"
 
-RSpec.feature "Sending message" do
+RSpec.feature "Sending a message" do
   before do
     @john = User.create!(first_name: "John",
                          last_name: "Doe",
                          email: "john@example.com",
                          password: "password")
 
-    @sarah = User.create(first_name: "Sarah",
+    @sarah = User.create!(first_name: "Sarah",
                         last_name: "Anderson",
                         email: "sarah@example.com",
                         password: "password")
 
-    @henry = User.create(first_name: "Henry",
+    @henry = User.create!(first_name: "Henry",
                         last_name: "Flynn",
                         email: "henry@example.com",
                         password: "password")
 
     @room_name = @john.first_name + '-' + @john.last_name
-    @room = Room.create(name: @room_name, user_id: @john.id)
+    @room = Room.create!(name: @room_name, user_id: @john.id)
 
     login_as(@john)
 
